@@ -200,15 +200,8 @@ h3{
                         Your PTS Requests
                     </a>
                     @elseif(Auth()->user()->role == "Member")
-                    {{-- <a href="http://unbreakable.me/pts">
-                        <i class="fas fa-dumbbell"></i>
-                        Private Training Session
-                    </a> --}}
+
                     @else
-                    <a href="http://unbreakable.me/user/create">
-                        <i class="fas fa-user-plus"></i>
-                        Register Users
-                    </a>
                     <a href="http://unbreakable.me/admin/dashboard">
                         <i class="fas fa-users-cog"></i>
                         Admin Dashboard

@@ -34,4 +34,16 @@ class PagesController extends Controller
         return view('admin.index');
     }
 
+    public function manageUsers(){
+        return view('admin.users');
+    }
+
+    public function managePTS(){
+        return view('admin.pts');
+    }
+
+    public function manageWTS(){
+        return view('admin.wts');
+    }
+
 }

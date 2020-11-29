@@ -20,14 +20,14 @@
         transform: translateY(-50%);
     }
     a, a:hover, a:focus {
-        color: #ababab;
+        color: #ababab !important;
         text-decoration: none;
         transition: all 0.3s;
     }
 
     #sidebar {
         background: #151516;
-        color: #ababab;
+        color: #ababab !important;
         transition: all 0.3s;
     }
 
@@ -177,9 +177,25 @@
                             <i class="fas fa-user"></i>
                             Profile
                         </a>
+                        <a href="http://unbreakable.me/admin/dashboard">
+                            <i class="fas fa-users-cog"></i>
+                            Control Panel
+                        </a>
                         <a href="http://unbreakable.me/user/create">
                             <i class="fas fa-user-plus"></i>
                             Register Users
+                        </a>
+                        <a href="http://unbreakable.me/admin/users">
+                            <i class="fas fa-users"></i>
+                            Manage Users
+                        </a>
+                        <a href="http://unbreakable.me/admin/pts">
+                            <i class="fas fa-dumbbell"></i>
+                            Private Training Sessions
+                        </a>
+                        <a href="http://unbreakable.me/admin/pts">
+                            <i class="far fa-calendar-alt"></i>
+                            Weekly Training Schedules
                         </a>
                         {{-- Logout --}}
                         <a href="{{ route('logout') }}"

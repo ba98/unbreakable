@@ -1,7 +1,7 @@
 <style>
 a{
     font-family: 'Gotu', sans-serif;
-    color:#ababab;
+    color:#ababab !important;
     font-size: 90%;
 }
 li{
@@ -32,10 +32,22 @@ li{
                     </li>
                 @else
                 <li class="nav-item" style="">
+                    <a href="http://unbreakable.me">Home</a>
+                </li>
+                <li class="nav-item" style="">
+                    <a href="http://unbreakable.me/admin/dashboard">Control Panel</a>
+                </li>
+                <li class="nav-item" style="">
                     <a href="http://unbreakable.me/user/create">Register Users</a>
                 </li>
                 <li class="nav-item" style="">
-                    <a href="http://unbreakable.me/admin/dashboard">Admin Dashboard</a>
+                    <a href="http://unbreakable.me/admin/users">Manage Users</a>
+                </li>
+                <li class="nav-item" style="">
+                    <a href="http://unbreakable.me/admin/pts">Private Training Sessions</a>
+                </li>
+                <li class="nav-item" style="">
+                    <a href="http://unbreakable.me/admin/wts">Weekly Training Sessions</a>
                 </li>
 
                     <li class="nav-item dropdown">

@@ -33,13 +33,11 @@
 
 
 <body>
-    <div style="position:relative;">
+    <div>
         <main>
             <div class="">
                 @include('inc.messages')
             </div>
-            @include('inc.adminNav')
-            @include('inc.adminSide')
             @yield('content')
         </main>
     </div>

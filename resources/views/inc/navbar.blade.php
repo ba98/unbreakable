@@ -45,9 +45,9 @@
                     <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/pts">Private Training Session</a>
                 </li> --}}
                 @else
-                <li class="nav-item" style="margin-left:20px; margin-top:8px;">
+                {{-- <li class="nav-item" style="margin-left:20px; margin-top:8px;">
                     <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/user/create">Register Users</a>
-                </li>
+                </li> --}}
                 <li class="nav-item" style="margin-left:20px; margin-top:8px;">
                     <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/admin/dashboard">Admin Dashboard</a>
                 </li>

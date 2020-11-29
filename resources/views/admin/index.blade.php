@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 
+@include('inc.adminNav')
+@include('inc.adminSide')
+
     @php
         use App\User;
         use App\Post;
@@ -10,7 +13,6 @@
         $discussionsNum = Post::where('type','=','Discussion')->count();
         $momentsNum = Post::where('type','!=','Discussion')->count();
     @endphp
-
     <div class="main-content" style="padding-top: 0px !important;">
 
         <div class="row m-t-25">
@@ -26,9 +28,6 @@
                                 <span>Members</span>
                             </div>
                         </div><br>
-                        {{-- <div class="overview-chart">
-                            <canvas id="widgetChart1"></canvas>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -44,9 +43,6 @@
                                 <span>Coaches</span>
                             </div>
                         </div><br>
-                        {{-- <div class="overview-chart">
-                            <canvas id="widgetChart2"></canvas>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -62,9 +58,6 @@
                                 <span>Moments</span>
                             </div>
                         </div><br>
-                        {{-- <div class="overview-chart">
-                            <canvas id="widgetChart3"></canvas>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -80,15 +73,11 @@
                                 <span>Discussions</span>
                             </div>
                         </div><br>
-                        {{-- <div class="overview-chart">
-                            <canvas id="widgetChart4"></canvas>
-                        </div> --}}
                     </div>
                 </div>
             </div>
         </div>
-        {{-- --}}
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-12">
                 <h2 class="title-1 m-b-25">Earnings By Items</h2>
                 <div class="table-responsive table--no-card m-b-40">
@@ -129,7 +118,6 @@
                                         <td>United States</td>
                                         <td class="text-right">$119,366.96</td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -204,13 +192,10 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="au-task__footer">
-                            <button class="au-btn au-btn-load js-load-btn">load more</button>
-                        </div> --}}
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="copyright">
@@ -220,7 +205,7 @@
         </div>
     </div>
     <!-- END MAIN CONTENT-->
-    <!-- END PAGE CONTAINER-->
     </div>
     </div>
+    {{-- End of Sidebar --}}
 @endsection

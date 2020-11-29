@@ -1,7 +1,9 @@
-@extends('layouts.app')
-
+@extends('layouts.admin')
 @section('content')
-@include('inc.sidebar')
+
+@include('inc.adminNav')
+@include('inc.adminSide')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

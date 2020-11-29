@@ -42,6 +42,9 @@ Route::group(['middleware' => 'auth', 'middleware' => 'verified'], function () {
 
     Route::get('/abu', 'PagesController@abu')->name('abu');
     Route::get('/admin/dashboard', 'PagesController@dash')->name('dash');
+    Route::get('/admin/users', 'PagesController@manageUsers')->name('manageUsers');
+    Route::get('/admin/pts', 'PagesController@managePTS')->name('managePTS');
+    Route::get('/admin/wts', 'PagesController@manageWTS')->name('manageWTS');
 
 Auth::routes(['verify' => true]);
 Auth::routes();
