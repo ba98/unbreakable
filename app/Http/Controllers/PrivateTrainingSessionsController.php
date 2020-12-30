@@ -9,30 +9,12 @@ use Mail;
 
 class PrivateTrainingSessionsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        /* $coaches = User::where('role', '=', 'coach')->get();
-        return view('PTS.index')->with('coaches', $coaches); */
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         $coach = User::find($id);
         return view('PTS.show')->with('coach', $coach);
     }
-
 
     public function notifyCoach(Request $request, $id)
     {

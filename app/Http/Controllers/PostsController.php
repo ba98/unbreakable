@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Post;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $posts = Post::where('type', '!=', 'Discussion')->orderBy('created_at', 'desc')->get();
@@ -24,29 +21,16 @@ class PostsController extends Controller
         return view('posts.discussions')->with('discussions', $discussions);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
         $this->validate($request, [
             'caption' => 'required|string',
-            /* 'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' */
         ]);
 
         if($request->hasfile('images'))
@@ -54,7 +38,7 @@ class PostsController extends Controller
 
             foreach($request->file('images') as $image)
             {
-                $name=$image->getClientOriginalName();
+                $name = auth()->user()->id.'_image'.time().'.'.$image->getClientOriginalName();
                 $image->move('images/', $name);
                 $data[] = $name;
             }
@@ -62,8 +46,8 @@ class PostsController extends Controller
 
         //Store post
         $posts = new Post();
-        $posts->user_id = Auth()->user()->id;
-        $posts->user_name= Auth()->user()->name;
+        $posts->user_id = auth()->user()->id;
+        $posts->user_name= auth()->user()->name;
         $posts->type = $request->input("type");
         $posts->caption = $request->input("caption");
         if($request->hasfile('images')){
@@ -75,56 +59,35 @@ class PostsController extends Controller
         return redirect('/posts')->with('success', 'Your post was added successfully (:');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $posts = Post::find($id);
         return view('posts.show')->with('posts', $posts);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $post = Post::find($id);
         return view('posts.edit')->with('post', $post);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'caption' => 'required|string',
-            /* 'images' => 'required', */
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         if($request->hasfile('images'))
-         {
+        {
 
             foreach($request->file('images') as $image)
             {
-                $name=$image->getClientOriginalName();
+                $name = auth()->user()->id.'_image'.time().'.'.$image->getClientOriginalName();
                 $image->move('images/', $name);
                 $data[] = $name;
             }
-         }
-
+        }
 
         //Update post
         $posts =  Post::find($id);
@@ -140,16 +103,16 @@ class PostsController extends Controller
         return redirect('/posts')->with('success', 'Your post was updated successfully (:');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $post = Post::find($id);
+        $imageName = strtr($post->images, "\"", " ");
+        $imageName = explode(' , ', trim($imageName));
         $post->delete();
+
+        foreach($imageName as $img){
+            File::delete('images/'. $img);
+        }
 
         return redirect('/posts')->with('success', 'Your post was deleted successfully!');
     }

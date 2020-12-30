@@ -18,16 +18,13 @@ class PagesController extends Controller
 
         return view('registerUsers');
     }
+    
     public function ptsRespond(){
         return view('PTS.respond');
     }
 
     public function pts(){
         return view('PTS.index');
-    }
-
-    public function abu(){
-        return view('abu');
     }
 
     public function dash(){

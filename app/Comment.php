@@ -18,10 +18,10 @@ class Comment extends Model
 
     public function deleteRelatedData() {
 
-        // Delete all votes of this review
+        // Delete the comment
         $this->delete();
 
-        // Calling the same method to all of the child of this review
+        // Delete every reply that belongs to the deleted comment
         $this->replies->each->deleteRelatedData();
       }
 }

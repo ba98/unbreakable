@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Member;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'role', 'phone_num', 'email', 'password',
+        'name', 'role', 'phone_num', 'email', 'image', 'password', 'ban_status',
     ];
 
     /**
@@ -36,4 +37,33 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function member_ban($id)
+    {
+        $ban = Member::where('id', $id)->first('ban_status');
+        $ban_status = substr($ban, 15,-2);
+
+        return $ban_status;
+
+    }
+    public function auth_member_ban()
+    {
+        if(auth()->user()->role == "Member"){
+
+            $ban = Member::where('id', auth()->user()->id)->first('ban_status');
+            $ban_status = substr($ban, 15,-2);
+
+            return $ban_status;
+        }
+        return "Not Banned";
+    }
+    public function member_until($id)
+    {
+        $member_until = Member::where('id', $id)->first('member_until');
+        $until = substr($member_until, 17,-2);
+
+        return $until;
+    }
+
+
 }
