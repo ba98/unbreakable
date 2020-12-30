@@ -29,8 +29,13 @@ Route::group(['middleware' => 'auth', 'middleware' => 'verified'], function () {
     Route::post('/comment/store', 'CommentsController@store')->name('comment.add');
     Route::post('user', 'UsersController@update_image')->name('updateImage');
 
-    /* Route::get('/pts/{id}/notifyCoach', 'VehiclesController@notifyCoach');
-    Route::get('/pts/{id}', 'PagesController@pts')->name('pts'); */
+    Route::get('/updateUserStatus/{id}', 'UsersController@updateUserStatus');
+    Route::get('/renew/{id}', 'UsersController@renewSubscription');
+    Route::get('/admin/dashboard', 'PagesController@dash')->name('dash');
+    Route::get('/admin/users', 'PagesController@manageUsers')->name('manageUsers');
+    Route::get('/admin/pts', 'PagesController@managePTS')->name('managePTS');
+    Route::get('/admin/wts', 'PagesController@manageWTS')->name('manageWTS');
+
     });
 
     Route::get('/', function () {
@@ -39,12 +44,6 @@ Route::group(['middleware' => 'auth', 'middleware' => 'verified'], function () {
     Route::get('/home', function () {
         return view('home');
     });
-
-    Route::get('/abu', 'PagesController@abu')->name('abu');
-    Route::get('/admin/dashboard', 'PagesController@dash')->name('dash');
-    Route::get('/admin/users', 'PagesController@manageUsers')->name('manageUsers');
-    Route::get('/admin/pts', 'PagesController@managePTS')->name('managePTS');
-    Route::get('/admin/wts', 'PagesController@manageWTS')->name('manageWTS');
 
 Auth::routes(['verify' => true]);
 Auth::routes();
