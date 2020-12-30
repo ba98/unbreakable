@@ -17,13 +17,13 @@ class CreateWeeklyTrainingSchedulesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('coach_id');
             $table->string('coach_name');
-            $table->string('monday')->default('No Session');
-            $table->string('tuesday')->default('No Session');
-            $table->string('wednesday')->default('No Session');
-            $table->string('thursday')->default('No Session');
-            $table->string('friday')->default('No Session');
-            $table->string('saturday')->default('No Session');
-            $table->string('sunday')->default('No Session');
+            $table->string('monday');
+            $table->string('tuesday');
+            $table->string('wednesday');
+            $table->string('thursday');
+            $table->string('friday');
+            $table->string('saturday');
+            $table->string('sunday');
             $table->timestamps();
         });
 
