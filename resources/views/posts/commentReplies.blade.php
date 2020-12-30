@@ -13,9 +13,9 @@
         <div class="row">
             <div class="col-md-">
                 <img class="commentimg" style="margin-left: 10px" src="../storage/images/{{$comment->user->image}}" alt="{{$comment->user->name}}">
-            </div> {{-- Where on earth did $userImage came from!! --}}
+            </div>
             <div class="col-md-2" style="margin-top:20px;">
-                <strong>{{$comment->user->name}}</strong>{{-- <hr style="background-color:#000"> --}}
+                <strong>{{$comment->user->name}}</strong>
             </div>
         </div><br>
 

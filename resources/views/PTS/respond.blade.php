@@ -1,36 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('inc.sidebar')
+@include('inc.sidebar')
 
-    @php
+@php
     use App\PrivateTrainingSession;
     use App\User;
 
-    $ptss = PrivateTrainingSession::where('coach_id', "=", auth()->user()->id)->orderBy('created_at', 'desc')->get();
-    $pts_sent = PrivateTrainingSession::where('coach_id', "=", auth()->user()->id)->where('status', "=", "Sent")->count();
-    $pts_status = PrivateTrainingSession::where('coach_id', "=", auth()->user()->id)->where('status', "!=", "Sent")->count();
-    @endphp
+    $ptss = PrivateTrainingSession::where('coach_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+    $pts_sent = PrivateTrainingSession::where('coach_id', auth()->user()->id)->where('status', "Sent")->count();
+    $pts_status = PrivateTrainingSession::where('coach_id', auth()->user()->id)->where('status', "!=", "Sent")->count();
+@endphp
 
+<style>
+    #down{
+        margin-top: 200px;
+    }
+</style>
     <div class="container">
         <div class="jumbotron">
             @if ($ptss->count() > 0)
                 @if ($pts_sent > 0)
-                    <h3>New Requests</h3>
-                    <hr>
+                    <h3>New Requests</h3><hr>
+                    <div class="container" id="down">
                 @endif
+
                 @foreach ($ptss as $pts)
                     @if ($pts->status == 'Sent')
-
                         @php
-                        $member_phone = User::where("id", "=", $pts->member_id)->first("phone_num");
-                        $member_image = User::where("id", "=", $pts->member_id)->first("image");
-                        $num = substr($member_phone, 14,-2);
-                        $image = substr($member_image, 10,-2);
-                        $date = substr($pts->session_datetime, 0,-8);
-                        $time = substr($pts->session_datetime, 10);
+                            $member_phone = User::where("id", "=", $pts->member_id)->first("phone_num");
+                            $member_image = User::where("id", "=", $pts->member_id)->first("image");
+                            $num = substr($member_phone, 14,-2);
+                            $image = substr($member_image, 10,-2);
+                            $date = substr($pts->session_datetime, 0,-8);
+                            $time = substr($pts->session_datetime, 10);
                         @endphp
-
                         <div class="row">
                             <div class="col-md-2">
                                 <img src="../storage/images/{{ $image }}" alt="Member Image" id="memberImage">
@@ -56,26 +60,27 @@
                                 </form>
                             </div>
                         </div>
-
                         <hr>
                     @endif
                 @endforeach
+                @if ($pts_sent > 0)
+                    </div>
+                @endif
 
                 @if ($pts_status > 0)
-                    <h3>History</h3>
-                    <hr>
+                    <h3>History</h3><br>
+                    <div class="container" id="down">
                 @endif
                 @foreach ($ptss as $pts)
                     @if ($pts->status != 'Sent')
                         @php
-                        $member_phone = User::where("id", "=", $pts->member_id)->first("phone_num");
-                        $member_image = User::where("id", "=", $pts->member_id)->first("image");
-                        $num = substr($member_phone, 14,-2);
-                        $image = substr($member_image, 10,-2);
-                        $date = substr($pts->session_datetime, 0,-8);
-                        $time = substr($pts->session_datetime, 10);
+                            $member_phone = User::where("id", "=", $pts->member_id)->first("phone_num");
+                            $member_image = User::where("id", "=", $pts->member_id)->first("image");
+                            $num = substr($member_phone, 14,-2);
+                            $image = substr($member_image, 10,-2);
+                            $date = substr($pts->session_datetime, 0,-8);
+                            $time = substr($pts->session_datetime, 10);
                         @endphp
-
                         <div class="row">
                             <div class="col-md-2">
                                 <img src="../storage/images/{{ $image }}" alt="Member Image" id="memberImage">
@@ -92,12 +97,13 @@
                         <hr>
                     @endif
                 @endforeach
-
+                @if ($pts_status > 0)
+                    </div>
+                @endif
             @else
                 <h2>You haven't received any request yet!</h2>
                 <hr>
             @endif
         </div>
     </div>
-
 @endsection

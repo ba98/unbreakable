@@ -119,9 +119,6 @@ $discussions = Post::where('user_id', '=', $user->id)->where('type', '=', 'discu
 ?>
 <div class="container emp-profile">
         <div class="row">
-            {{-- <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-            </div> --}}
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -239,21 +236,12 @@ $discussions = Post::where('user_id', '=', $user->id)->where('type', '=', 'discu
                         @else
                         @foreach($userPosts as $userPost)
                             @if($userPost->type == "Discussion")
-                            @php
-                                $Comments = Comment::where('commentable_id', '=', $userPost->id)->get();
-                                $noOfComments = $Comments->count();
-                                $date = substr($userPost->created_at, 0, -9);
-                            @endphp
                             <div class="col-md-9">
                                 <div class="row" style="justify-content:center; font-family: 'Gotu', sans-serif;">
                                     <div id="login-container">
-                                        {{-- <h2>
-                                            {{$userPost->user_name}}
-                                        </h2> --}}
                                         <div class="description">
                                             {{$userPost->caption}}
                                         </div>
-
                                         <div style="justify-content: center; text-align: center;">
                                             <a href="/posts/{{$userPost->id}}">
                                                 <button><i class="far fa-comment-alt"></i> Open</button>

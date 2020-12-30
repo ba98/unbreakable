@@ -193,7 +193,7 @@
                             <i class="fas fa-dumbbell"></i>
                             Private Training Sessions
                         </a>
-                        <a href="http://unbreakable.me/admin/pts">
+                        <a href="http://unbreakable.me/admin/wts">
                             <i class="far fa-calendar-alt"></i>
                             Weekly Training Schedules
                         </a>

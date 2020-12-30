@@ -40,14 +40,14 @@
                     <li class="nav-item" style="margin-left:20px; margin-top:8px;">
                         <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/wts/create">Update Training Schedule</a>
                     </li>
+                    <li class="nav-item" style="margin-left:20px; margin-top:8px;">
+                        <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/pts/respond">PTS Requests</a>
+                    </li>
                 @elseif(Auth()->user()->role == "Member")
                 {{-- <li class="nav-item" style="margin-left:20px; margin-top:8px;">
                     <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/pts">Private Training Session</a>
                 </li> --}}
                 @else
-                {{-- <li class="nav-item" style="margin-left:20px; margin-top:8px;">
-                    <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/user/create">Register Users</a>
-                </li> --}}
                 <li class="nav-item" style="margin-left:20px; margin-top:8px;">
                     <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/admin/dashboard">Admin Dashboard</a>
                 </li>

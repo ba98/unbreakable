@@ -5,6 +5,7 @@
 <?php
     use App\Comment;
     use App\User;
+    use Carbon\Carbon;
 
     $Comments = Comment::where('commentable_id', '=', $posts->id)->get();
     $noOfComments = $Comments->count();
@@ -12,7 +13,6 @@
     $user = User::where('id', '=', $posts->user_id)->first();
     $userImage = $user->image;
 
-    /* $imageName = substr(, 2, -2); */
     $imageName = strtr($posts->images, "\"", " ");
     $imageName = explode(' , ',trim($imageName));
 
@@ -23,7 +23,6 @@
         margin-left: 25px
     }
     .userimg{
-        /* border: 1px solid #000 !important; */
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
         border-radius: 50% !important;
         object-fit: cover;
@@ -79,8 +78,11 @@
                     <h6 style="color:#000; padding-left:10px;"><strong><?php echo $noOfComments;?> Comments</strong></h6>
                     @endif
                 </div>
+                @php
+                    $timestamp = Carbon::parse($date)->timestamp;
+                @endphp
                 <div class="col-md-6">
-                    <h6 class="float-right" style="color:#000;"><strong>Shared on: {{$date}}</strong></h6>
+                    <h6 class="float-right" style="color:#000;"><strong>Shared on: {{date("M j, Y", $timestamp)}}</strong></h6>
                 </div>
             </div>
             <hr>
@@ -101,5 +103,6 @@
     </div>
         <br>
     </div>
-</div><!-- End of Sidebar -->
+</div>
+<!-- End of Sidebar -->
 @endsection

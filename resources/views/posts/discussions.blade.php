@@ -53,5 +53,6 @@
 </div>
 @endforeach
 </div>
-</div><!-- End of Sidebar -->
+</div>
+<!-- End of Sidebar -->
 @endsection

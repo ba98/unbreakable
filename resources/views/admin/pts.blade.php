@@ -1,11 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
-
-@php
-    use App\PrivateTrainingSession;
-    $ptss = PrivateTrainingSession::orderBy('created_at', 'desc')->get();
-@endphp
 <style>
     html, body{
         width:100% !important;
@@ -13,20 +7,39 @@
         margin:0 !important;
         overflow-x: hidden !important;
     }
+
     #sidebar .sidebar-header{
         padding-left: 20px !important;
         margin-bottom: -38px !important;
         background: #151516;
     }
+
     h3{
         font-size: 24px !important;
     }
+
+    #showMe {
+    animation: cssAnimation 0s .5s forwards;
+    visibility: hidden;
+    }
+
+    @keyframes cssAnimation {
+    to   { visibility: visible; }
+    }
 </style>
+@php
+    use App\PrivateTrainingSession;
+    $ptss = PrivateTrainingSession::orderBy('created_at', 'desc')->get();
+@endphp
+
+<div id="showMe">
 @include('inc.adminNav')
 @include('inc.adminSide')
+
 <div class="container">
     <div style="width:100%;text-align:center; ">
         <h2>Private Training Sessions</h2>
+        <h6>Newest to oldest</h6>
     </div>
 </div>
 <div class="main-content">
@@ -65,12 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright">
-                        <p>Template by <a href="https://colorlib.com">Colorlib</a>.</p>                                </div>
-                </div>
-            </div>
         </div>
     </div>
+</div>
 </div>

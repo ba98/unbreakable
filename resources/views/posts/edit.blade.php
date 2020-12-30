@@ -71,7 +71,6 @@
                 <h2></h2>
                 @endif
             </div>
-
         </div>
 
         {{ Form::reset('Reset', ['class' => 'float-right btn btn-danger', 'style' => '']) }}
@@ -81,16 +80,6 @@
     </div><br><br>
     </div>
     </div>
-    {{-- @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -104,6 +93,5 @@
             });
 
         });
-
     </script>
 @endsection

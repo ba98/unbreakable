@@ -8,11 +8,14 @@
             <div class="card">
                 <div class="card-header">Weekly Training Schedule</div>
                 <div class="card-body">
+
                     {!! Form::open(['action' => 'WeeklyTrainingSchedulesController@store', 'method' => 'POST'])!!}
                     <div class="form-group row">
                         <label for="monday" class="col-md-4 col-form-label text-md-right">Monday: From</label>
                         <div class="col-md-3">
-                            <input id="monday" type="text" class="form-control timepicker" name="mondayF">
+                            <input type="text" class="form-control timepicker" name="mondayF">
+                        </div>
+                        <div class="bfh-timepicker" data-mode="12h">
                         </div>
                         <label for="monday" class=" col-md-1 col-form-label text-md-right">To</label>
                         <div class="col-md-3">
@@ -89,19 +92,22 @@
                     {{Form::submit('Submit' , ['class' =>[ 'btn btn-dark', 'float-right']])}}
                     {!! Form::close() !!}
 
-                   {{--  @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br>
-                        <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                    @endif --}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $('.timepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 60,
+        minTime: '10',
+        maxTime: '11:00pm',
+        defaultTime: false,
+        startTime: '10:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+</script>
 @endsection
