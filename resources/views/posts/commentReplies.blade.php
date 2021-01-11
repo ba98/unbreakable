@@ -11,10 +11,10 @@
     <div class="display-comment" style="color:#000; background-color:#fff; padding-left:10px;">
         <br>
         <div class="row">
-            <div class="col-md-">
+            <div>
                 <img class="commentimg" style="margin-left: 10px" src="../storage/images/{{$comment->user->image}}" alt="{{$comment->user->name}}">
             </div>
-            <div class="col-md-2" style="margin-top:20px;">
+            <div style="margin-top:20px; margin-left: 10px">
                 <strong>{{$comment->user->name}}</strong>
             </div>
         </div><br>

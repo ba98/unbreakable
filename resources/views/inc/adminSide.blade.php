@@ -163,9 +163,10 @@
     </style>
         <div class="wrapper" style="font-family: 'Gotu', sans-serif;">
             <nav id="sidebar" class="d-none d-md-block">
-                <div class="sidebar-header">
-                    <h3>MENU</h3>
-                    <strong>MENU</strong>
+                <div class="sidebar-header" style="margin-top:20px !important">
+                    <a href="/home">
+                        <img src="../images/U.png" style="width: 180px;" alt="Unbreakable">
+                    </a>
                 </div>
                 <ul class="list-unstyled components">
                     <li>

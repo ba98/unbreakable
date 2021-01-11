@@ -73,7 +73,7 @@ class WeeklyTrainingSchedulesController extends Controller
 
         }
 
-        return redirect('/home')->with('success', 'Your weekly training schedule was created successfully (:');
+        return redirect('/wts')->with('success', 'Your weekly training schedule was created successfully (:');
     }
 
     public function show($id)

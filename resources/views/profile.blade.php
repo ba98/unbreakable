@@ -113,6 +113,7 @@ p{
 <?php
 use App\Post;
 use App\Comment;
+use Carbon\Carbon;
 $userPosts = Post::where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->get();
 $moments = Post::where('user_id', '=', $user->id)->where('type', '!=', 'discussion')->get();
 $discussions = Post::where('user_id', '=', $user->id)->where('type', '=', 'discussion')->get();
@@ -144,16 +145,22 @@ $discussions = Post::where('user_id', '=', $user->id)->where('type', '=', 'discu
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
-                    <h5><br><br>
+                    <h1><br>
                         {{$user->name}}
-                    </h5>
+                    </h1>
                     <h6 style="margin-top:25px">
-                        (Role: {{$user->role}})
+                        (Role: <strong>{{$user->role}}</strong>)
                     </h6>
                     @if(Auth()->user()->role == "Member")
-                        <p class="proile-rating">Subscription date/time : <span>{{$user->updated_at}}</span></p>
+                        @php
+                            $timestamp = Carbon::parse($user->member_until($user->id))->timestamp;
+                        @endphp
+                        <p class="proile-rating">Member until: <span>{{date("M j, Y", $timestamp)}}</span></p>
                     @else
-                        <p class="proile-rating">Registered since : <span>{{$user->created_at}}</span></p>
+                        @php
+                            $timestamp = Carbon::parse($user->created_at)->timestamp;
+                        @endphp
+                        <p class="proile-rating">Registered since : <span>{{date("M j, Y", $timestamp)}}</span></p>
                     @endif
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -171,41 +178,25 @@ $discussions = Post::where('user_id', '=', $user->id)->where('type', '=', 'discu
         </div>
         <div class="row">
             <div class="col-md-4">
-            </div>
+            </div><br>
             <div class="col-md-8" style="margin:-5% 0px 0px 0px;">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"
                     style="border-style:solid; border-radius:20px; border-width:2px; border-color:#60779c; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);">
                         <div class="row">
-                            <div class="col-md-4">
-                                <label style="margin-top:10px; margin-left:10px;">User ID:</label>
+                            <div class="col-md-6">
+                                <label style="margin-top:10px; margin-left:10px;">User ID: {{$user->id}}</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{$user->id}}</p>
+                                <label style="margin-top:10px; margin-left:10px;">User name: {{$user->name}}</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <label style="margin-top:10px; margin-left:10px;">User Name:</label>
+                            <div class="col-md-6">
+                                <label style="margin-top:10px; margin-left:10px;">E-mail: {{$user->email}}</label>
                             </div>
                             <div class="col-md-6">
-                            <p>{{$user->name}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label style="margin-top:10px; margin-left:10px;">User Email:</label>
-                            </div>
-                            <div class="col-md-6">
-                            <p>{{$user->email}}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                            <label style="margin-top:10px; margin-left:10px;">Phone Number:</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>{{$user->phone_num}}</p>
+                                <label style="margin-top:10px; margin-left:10px;">Phone Number: {{$user->phone_num}}</label>
                             </div>
                         </div>
                     </div>

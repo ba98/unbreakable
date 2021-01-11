@@ -73,7 +73,7 @@
     .text-primary{
         color: #ababab !important;
     }
-    
+
     /* footer */
     .site-footer hr
     {

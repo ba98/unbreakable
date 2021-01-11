@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Member;
+use App\Coach;
+use App\Staff;
 use Auth;
 use Carbon\Carbon;
 
@@ -48,6 +50,24 @@ class UsersController extends Controller
             $member->member_until = $addOneMonth;
             $member->ban_status = "Not Banned";
             $member->save();
+
+        }elseif(Input::get("role") == "Coach"){
+            $latestCoach = User::where('role', 'coach')->latest('id')->first('id');
+            $id = substr($latestCoach, 6,-1);
+
+            $coach = new Coach();
+            $coach->id = $id;
+            $coach->salary = $request->input('salary');
+            $coach->save();
+
+        }elseif(Input::get("role") == "Staff"){
+            $latestStaff = User::where('role', 'staff')->latest('id')->first('id');
+            $id = substr($latestStaff, 6,-1);
+
+            $staff = new Staff();
+            $staff->id = $id;
+            $staff->salary = $request->input('salary');
+            $staff->save();
         }
 
         return redirect('/admin/dashboard')->with('success', 'Done!');
@@ -57,6 +77,7 @@ class UsersController extends Controller
 
         $member = Member::find($id);
         $member->member_until = Input::get("renew");
+        $member->membership_fees += 150;
         $member->save();
 
         return back()->with('success', 'Membership was renewed for one month successfully!');

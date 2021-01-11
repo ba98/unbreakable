@@ -20,6 +20,7 @@ $rowCount = 0;
 $bootstrapColWidth = 12 / $numOfCols;
 ?>
 <div class="container">
+    @if ($wts->count() > 0)
     <div class="row">
         @foreach ($wts as $tariningSchedule)
         <div class="col-md-<?php echo $bootstrapColWidth; ?>">
@@ -39,5 +40,11 @@ $bootstrapColWidth = 12 / $numOfCols;
             @endforeach
         </div>
     </div>
+    @else
+    <div class="jumbotron" style="height: 8rem">
+        <h3>No schedules are available currently!</h3>
+        <hr>
+    </div>
+    @endif
 </div>
 @endsection

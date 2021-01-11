@@ -44,17 +44,19 @@
     <div class="row" style="justify-content:center;">
         <div class="col-md-7" style="border-radius: 20px; background-color:#dddddd"><br>
             <div class="page-header">
-                <div class="row">
-                    <div class="col-md-">
-                        <img class="userimg" src="../storage/images/{{$userImage}}" alt="{{$posts->user_name}}" style="margin-left:10px">
+                <div class="row" style="justify-content:center;">
+                    <div >
+                        <img class="userimg" src="../storage/images/{{$userImage}}" alt="{{$posts->user_name}}">
+                        <h4 style="margin-top:10px "><strong>{{$posts->user_name}}</strong></h4>
                     </div>
-                    <div class="col-md-10"><br>
-                        <h5 style="color:#000; margin-top:10px;"><strong>{{$posts->user_name}}:</strong> {{$posts->caption}}</h5><hr style="background-color: #000">
+                    <div class="container" style="font-size: 18px">
+
+                        <span>{{$posts->caption}}</span>
                     </div>
-                </div>
+                </div><hr style="background-color: #000">
             </div>
 
-            @if(count($imageName) >= 1)
+            @if(count($imageName) >= 1 && $posts->type != "Discussion")
                 @foreach ($imageName as $i => $imageName)
                     <div class="d-md-flex flex-md-equal w-100 my-md-8 pl-md-8">
                         <div class="overflow-hidden" style="border-radius: 21px 21px 0 0; margin-bottom:10px; background-color:#fff">
@@ -64,8 +66,8 @@
                         </div>
                     </div>
                 @endforeach
-                @else
-                <h2></h2>
+            @else
+
             @endif
 
             <div class="row">
@@ -93,8 +95,7 @@
                     <input type="hidden" name="post_id" value="{{$posts->id}}"/>
                 </div>
                 <div class="form-group" style="padding-left:10px;">
-                    <button class="desButton" type="submit"><i class="fas fa-keyboard"></i> Comment</button>
-
+                    <button class="desButton" type="submit" style="height: 2.5rem; width: 6.5rem"><i class="fas fa-keyboard"></i> Comment</button>
                 </div>
             </form>
             @include('posts.commentReplies', ['comments' => $posts->comments, 'post_id' => $posts->id])

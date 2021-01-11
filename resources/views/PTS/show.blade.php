@@ -11,28 +11,20 @@
     background: #fff;
 }
 #form{
-    margin-top: 200px !important;
+    margin-top: 14vw !important;
 }
 </style>
 
-<div class="container emp-profile">
+<div class="container emp-profile" style="margin-top: 20vh">
     <h3 style="text-align: center; color: #000;">Schedule a Private Training Session</h3><br>
     <form method="get" action="/pts/{{$coach->id}}/notifyCoach" id="form">
         @csrf
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="dt">Date and Time</label>
-                </div>
-                <div class="col-md-6">
-                    <label for="dt">Note</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
                     <div class="form-group">
                         <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" name="datetime" class="form-control datetimepicker-input" id="dt" data-target="#datetimepicker1"/>
+                            <input type="text" name="datetime" class="form-control datetimepicker-input" id="dt" data-target="#datetimepicker1" placeholder="Date/Time"/>
                             <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -49,7 +41,7 @@
         <input type="hidden" name="coachID" value="{{$coach->id}}">
         <input type="hidden" name="coachName" value="{{$coach->name}}">
         {{Form::hidden('_method', 'POST')}}
-        <div class="container" style="text-align: center;">
+        <div class="container" style="text-align: center;"><br>
             <button class="btn btn-dark" style="background-color: #4c648c" onclick="return confirm('Are you sure you want to send this request!');">Send a Request</button><br>
         </div>
     </form>

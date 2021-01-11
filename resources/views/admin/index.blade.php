@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('content')
 
-@include('inc.adminNav')
 @include('inc.adminSide')
 @include('inc.messages')
     @php
@@ -20,11 +19,50 @@
         $moments = Post::where('type', '!=', 'Discussion')->paginate(20);
         $discussions = Post::where('type', 'Discussion')->paginate(50);
     @endphp
+
+    <style>
+        .btn-dark{
+            margin: 10px;
+            color: #fff !important;
+        }
+
+    </style>
+
     <div class="container">
         <div class="row" style="justify-content:center;">
-            <h4>Welcome {{auth()->user()->name}}. You are in control</h4>
+            <h6>Welcome {{auth()->user()->name}}. You are in control</h6>
         </div>
     </div>
+
+    <div class="container d-md-none">
+        <div class="row" style="justify-content:center;">
+            <a href="http://unbreakable.me" role="button" class="btn btn-dark">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="http://unbreakable.me/profile" role="button" class="btn btn-dark">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+            <a href="http://unbreakable.me/user/create" role="button" class="btn btn-dark">
+                <i class="fas fa-user-plus"></i>
+                Register Users
+            </a>
+            <a href="http://unbreakable.me/admin/users" role="button" class="btn btn-dark">
+                <i class="fas fa-users"></i>
+                Manage Users
+            </a>
+            <a href="http://unbreakable.me/admin/pts" role="button" class="btn btn-dark">
+                <i class="fas fa-dumbbell"></i>
+                Private Training Sessions
+            </a>
+            <a href="http://unbreakable.me/admin/wts" role="button" class="btn btn-dark">
+                <i class="far fa-calendar-alt"></i>
+                Weekly Training Schedules
+            </a>
+        </div>
+    </div>
+
     <div class="main-content" style="padding-top: 0px !important;">
         <div class="row m-t-25">
             <div class="col-sm-6 col-lg-3">
@@ -158,10 +196,11 @@
                                             $addOneMonth = $until->add(1, 'month');
                                         }
                                     @endphp
-                                            <input name="renew" value="{{$addOneMonth}}" type="hidden">
-                                            <button type="submit" class="btn btn-primary"
-                                            onclick="return confirm('Are you sure you want to renew this membership for one month?');">Renew
-                                            </button>
+                                        <input name="renew" value="{{$addOneMonth}}" type="hidden">
+                                        <button type="submit" class="btn btn-primary"
+                                            onclick="return confirm('Are you sure you want to renew this membership for one month?');">
+                                            Renew
+                                        </button>
                                     {!!Form::close()!!}
                                 </li>
                             </div>

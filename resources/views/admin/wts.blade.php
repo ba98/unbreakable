@@ -38,7 +38,6 @@
 </style>
 
 <div id="showMe">
-@include('inc.adminNav')
 @include('inc.adminSide')
 <div class="container">
     <div style="width:100%;text-align:center; ">
@@ -103,5 +102,14 @@
             <br>
         </div>
     </div>
+    <div class="container">
+        <div class="row" style="justify-content:center;">
+            <a href="http://unbreakable.me/admin/dashboard" role="button" class="btn btn-dark" style="margin: 10px; color: #fff !important;">
+                <i class="fas fa-users-cog"></i>
+                Back
+            </a>
+        </div>
+    </div>
+{{-- Close sidebar --}}
 </div>
 </div>

@@ -16,7 +16,7 @@
     text-align: center !important;
 }
 </style>
-<div class="container emp-profile">
+<div class="container emp-profile" style="margin-top: 15vh">
     <h3 style="text-align: center; color: #000;">This Week's Training Schedule</h3><br>
     <div class="container" id="schedule">
         <h5>Coach {{ $wts->coach_name }}</h5><hr>

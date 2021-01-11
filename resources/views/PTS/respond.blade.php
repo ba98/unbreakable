@@ -14,14 +14,14 @@
 
 <style>
     #down{
-        margin-top: 200px;
+        margin-top: 15vw;
     }
 </style>
     <div class="container">
         <div class="jumbotron">
             @if ($ptss->count() > 0)
                 @if ($pts_sent > 0)
-                    <h3>New Requests</h3><hr>
+                    <h3>New Requests</h3><br>
                     <div class="container" id="down">
                 @endif
 
@@ -42,22 +42,23 @@
                             <div class="col-md-10"><br>
                                 <h5>Member's name: <strong>{{ $pts->member_name }}</strong></h5>
                                 <h5>Member's phone number: <strong>{{ $num }}</strong></h5>
-                                <h5>Requested Session Date and Time: <strong>{{ $date }}</strong> at <strong>{{ $time }}</strong></h5><br>
+                                <h5>Session's Date & Time: <strong>{{ $date }}</strong> at <strong>{{ $time }}</strong></h5><br>
+                                <div class="container">
                                 <form method="get" action="/pts/{{ $pts->id }}/notifyMember" id="form">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <button type="submit" name="status" value="Accepted"
                                                 class="btn btn-success" onclick="return confirm('Are you sure you want to ACCEPT this request!');">Accept</button>
-                                        </div>
-                                        <div class="col-md-6">
+                                            
                                             <button type="submit" name="status" value="Rejected"
-                                                class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to REJECT this request!');">Reject</button>
+                                                class="btn btn-danger" style="float: right !important" onclick="return confirm('Are you sure you want to REJECT this request!');">Reject</button>
                                         </div>
                                     </div>
                                     <input type="hidden" name="member_id" value="{{ $pts->member_id }}">
                                     <input type="hidden" method="POST">
                                 </form>
+                            </div>
                             </div>
                         </div>
                         <hr>
@@ -88,10 +89,17 @@
                             <div class="col-md-10"><br>
                                 <h5>Member's name: <strong>{{ $pts->member_name }}</strong></h5>
                                 <h5>Member's phone number: <strong>{{ $num }}</strong></h5>
-                                <h5>Requested Session Date and Time: <strong>{{ $date }}</strong> at
+                                <h5>Session's Date & Time: <strong>{{ $date }}</strong> at
                                     <strong>{{ $time }}</strong>
                                 </h5>
-                                <h5>Status: <strong>{{ $pts->status }}</strong></h5><br>
+                                <h5>
+                                    Status:
+                                    @if ($pts->status == "Accepted")
+                                        <strong style="color: green">{{ $pts->status }}</strong>
+                                    @elseif($pts->status == "Rejected")
+                                        <strong style="color: red">{{ $pts->status }}</strong>
+                                    @endif
+                                </h5><br>
                             </div>
                         </div>
                         <hr>

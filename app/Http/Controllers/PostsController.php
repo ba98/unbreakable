@@ -8,7 +8,7 @@ use App\Post;
 
 class PostsController extends Controller
 {
-    
+
     public function index()
     {
         $posts = Post::where('type', '!=', 'Discussion')->orderBy('created_at', 'desc')->get();
@@ -29,10 +29,17 @@ class PostsController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'caption' => 'required|string',
-        ]);
-
+        if($request->input("type") == "Discussion"){
+            $this->validate($request, [
+                'caption' => 'required|string',
+            ]);
+        }else{
+            $this->validate($request, [
+                'caption' => 'required|string',
+                'images'=> 'required',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
+        }
         if($request->hasfile('images'))
         {
 
@@ -45,18 +52,19 @@ class PostsController extends Controller
         }
 
         //Store post
-        $posts = new Post();
-        $posts->user_id = auth()->user()->id;
-        $posts->user_name= auth()->user()->name;
-        $posts->type = $request->input("type");
-        $posts->caption = $request->input("caption");
-        if($request->hasfile('images')){
+        $post = new Post();
+        $post->user_id = auth()->user()->id;
+        $post->user_name= auth()->user()->name;
+        $post->type = $request->input("type");
+        $post->caption = $request->input("caption");
+        if($request->hasfile('images') && $request->input("type") == "Moment"){
             $newImages = substr(json_encode($data),2,-2);
-            $posts->images = $posts->images.$newImages;
+            $post->images = $post->images.$newImages;
         }
-        $posts->save();
+        $post->save();
 
-        return redirect('/posts')->with('success', 'Your post was added successfully (:');
+        $latest = Post::where('user_id', auth()->user()->id)->latest("id")->first();
+        return redirect('/posts/'.$latest->id)->with('success', 'Your post was created successfully (:');
     }
 
     public function show($id)
@@ -73,11 +81,16 @@ class PostsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'caption' => 'required|string',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
+        if($request->input("type") == "Discussion"){
+            $this->validate($request, [
+                'caption' => 'required|string',
+            ]);
+        }else{
+            $this->validate($request, [
+                'caption' => 'required|string',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
+        }
         if($request->hasfile('images'))
         {
 
@@ -90,17 +103,23 @@ class PostsController extends Controller
         }
 
         //Update post
-        $posts =  Post::find($id);
-        $posts->user_id = Auth()->user()->id;
-        $posts->user_name= Auth()->user()->name;
-        $posts->caption = $request->input('caption');
-        if($request->hasfile('images')){
-            $newImages = substr(json_encode($data),2,-2);
-            $posts->images = $posts->images.'","'.$newImages;
-        }
-        $posts->save();
+        $post =  Post::find($id);
+        $post->user_id = Auth()->user()->id;
+        $post->user_name= Auth()->user()->name;
+        $post->caption = $request->input('caption');
 
-        return redirect('/posts')->with('success', 'Your post was updated successfully (:');
+        if($request->hasfile('images') && $post->type == "Moment"){
+            $newImages = substr(json_encode($data),2,-2);
+            if($post->images != Null){
+                $post->images = $post->images.'","'.$newImages;
+            }else{
+                $post->images = $post->images.$newImages;
+            }
+        }
+
+        $post->save();
+
+        return redirect('/posts/'.$id)->with('success', 'Your post was updated successfully (:');
     }
 
     public function destroy($id)

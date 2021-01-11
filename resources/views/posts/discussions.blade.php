@@ -4,6 +4,7 @@
 @include('inc.sidebar')
 @php
     use App\Comment;
+    use Carbon\Carbon;
 @endphp
 <div class="container">
     <div class="row" style="justify-content:center; font-family: 'Gotu', sans-serif;">
@@ -38,10 +39,14 @@
                 </a>
             </div><br>
 
+            @php
+                    $timestamp = Carbon::parse($date)->timestamp;
+            @endphp
+
             <footer>
                 <div class="likes">
                 <p>Shared on</p>
-                <p>{{$date}}</p>
+                <p>{{date("M j, Y", $timestamp)}}</p>
                 </div>
                 <div class="projects">
                 <p>Replies</p>

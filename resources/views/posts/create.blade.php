@@ -19,7 +19,7 @@
     <div class="row" style="justify-content:center;">
         <div class="col-md-6">
             <div class="page-header">
-                <h2>Share a Moment / Discussion</h2><hr>
+                <h2>Share a post</h2><hr>
             </div>
                 {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype'=>'multipart/form-data'])!!}
                 {{csrf_field()}}
@@ -28,9 +28,12 @@
                 <label for="" style="float: right; padding-left:3px">Discussion</label>
                 <input type="radio" name="type" value="Discussion" style="float: right; margin-top:3px">
                 <br><br>
-                {{Form::label('caption', 'Caption|Discussion')}}
+
+                <label for="caption">Caption | Discussion <span style="color: red">*</span></label>
                 {{Form::textarea('caption', '', ['class' => 'form-control', 'placeholder' => '', 'rows' => 4, 'id' => 'counter'])}}<br>
-                {{Form::label('images', 'Images')}}
+
+                {{Form::label('images', 'Image(s)')}}
+                <br><small><span style="color: red">Note:</span> Image field is required if you are sharing a moment only</small><br>
                 <div class="input-group control-group increment" >
                 <input type="file" name="images[]" class="form-control" id="image" onchange="preview_image();" multiple>
                     <div class="input-group-btn">
@@ -48,7 +51,7 @@
             </div>
         </div>
         <div class="container" style="justify-content:center; text-align:center;">
-            <h4>Preview images</h4>
+            <h6>Preview images</h6>
             <div id="image_preview"></div>
         </div>
         {{Form::reset('Reset' , ['class' => 'float-right btn btn-danger', 'style' => ''])}}

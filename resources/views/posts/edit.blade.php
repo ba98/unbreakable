@@ -25,21 +25,19 @@
         <div class="row" style="justify-content:center;">
             <div class="col-md-6">
                 <div class="page-header">
-                    <h2>Edit post</h2>
+                    <h2>Edit your post</h2>
                     <hr>
                 </div>
                 {!! Form::open(['action' => ['PostsController@update', $post->id], 'method' => 'PUT', 'enctype' =>
                 'multipart/form-data']) !!}
                 {{ csrf_field() }}
-                <input type="radio" name="type" value="Moment" checked>
-                <label for="">Moment</label>
-                <label for="" style="float: right; padding-left:3px">Discussion</label>
-                <input type="radio" name="type" value="Discussion" style="float: right; margin-top:3px">
-                <br><br>
-                {{ Form::label('caption', 'Caption|Discussion') }}
-                {{ Form::textarea('caption', $post->caption, ['class' => 'form-control', 'placeholder' => '', 'rows' => 4, 'id' => 'counter']) }}<br>
+                <label for="caption">Caption | Discussion <span style="color: red">*</span></label>
+                {{ Form::textarea('caption', $post->caption, ['class' => 'form-control', 'placeholder' => '', 'rows' => 3, 'id' => 'counter']) }}<br>
 
-                {{ Form::label('images', 'Add Images') }}
+    @if(Count($imageName) >= 1 && $post->type != "Discussion")
+
+                {{ Form::label('images', 'Add Image(s)') }}<br>
+                <small><span style="color: red">Note:</span> Image field is required if you are sharing a moment only</small>
                 <div class="input-group control-group increment">
                 <input type="file" name="images[]" class="form-control" id="image" onchange="preview_image();" multiple>
                     <div class="input-group-btn">
@@ -60,18 +58,17 @@
             </div>
         </div>
 
+
         <div class="container" style="justify-content:center; text-align:center;">
-            <h4>Preview images</h4>
+            <h6>Preview images</h6>
             <div id="image_preview">
-                @if(Count($imageName) >= 1)
                 @foreach ($imageName as $i => $imageName)
                     <img src="/images/{{$imageName}}" alt="" id="previmg">
                 @endforeach
-                @else
-                <h2></h2>
-                @endif
             </div>
         </div>
+
+    @endif
 
         {{ Form::reset('Reset', ['class' => 'float-right btn btn-danger', 'style' => '']) }}
         {{ Form::submit('Edit', ['class' => 'btn btn-light', 'style' => 'background-color:#60779c']) }}

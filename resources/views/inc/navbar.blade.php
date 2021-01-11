@@ -49,7 +49,7 @@
                 </li> --}}
                 @else
                 <li class="nav-item" style="margin-left:20px; margin-top:8px;">
-                    <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/admin/dashboard">Admin Dashboard</a>
+                    <a style="font-family: 'Gotu', sans-serif; color:#ababab" href="http://unbreakable.me/admin/dashboard">Control Panel</a>
                 </li>
                 @endif
 
